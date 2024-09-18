@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import "../global.css"
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -24,6 +25,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Barlow_Black: require('../assets/fonts/Barlow/Barlow-Black.ttf'),
+    Barlow_Light: require('../assets/fonts/Barlow/Barlow-Light.ttf'),
+    Barlow_Thin: require('../assets/fonts/Barlow/Barlow-Thin.ttf'),
+    Barlow_Medium: require('../assets/fonts/Barlow/Barlow-Medium.ttf'),
+    Barlow_Bold: require('../assets/fonts/Barlow/Barlow-Bold.ttf'),
     ...FontAwesome.font,
   });
 
@@ -50,8 +56,11 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack screenOptions={{
+        headerShown: false
+        }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
