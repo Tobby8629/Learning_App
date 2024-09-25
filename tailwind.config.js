@@ -6,11 +6,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        barlow: ["Barlow-Black", "sans-serif"],
-        "barlow-thin":["Barlow-Thin", "sans-serif"],
-        "barlow-light": ["Barlow-Light", "sans-serif"],
-        "barlow-medium":["Barlow-Medium", "sans-serif"],
-        "barlow-bold": ["Barlow-Bold", "sans-serif"]
+        "monserrat": ["Monserrat_Black", "sans-serif"],
+        "monserrat-thin":["Monserrat_Thin", "sans-serif"],
+        "monserrat-light": ["Monserrat_Light", "sans-serif"],
+        "monserrat-medium":["Monserrat_Medium", "sans-serif"],
+        "monserrat-semiBold":["Monserrat_SemiBold", "sans-serif"],
+        "monserrat-bold": ["Monserrat_Bold", "sans-serif"]
       }
     },
   },

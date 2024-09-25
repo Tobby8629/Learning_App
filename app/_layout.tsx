@@ -6,8 +6,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import "../global.css"
-
 import { useColorScheme } from '@/components/useColorScheme';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -25,11 +25,12 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    Barlow_Black: require('../assets/fonts/Barlow/Barlow-Black.ttf'),
-    Barlow_Light: require('../assets/fonts/Barlow/Barlow-Light.ttf'),
-    Barlow_Thin: require('../assets/fonts/Barlow/Barlow-Thin.ttf'),
-    Barlow_Medium: require('../assets/fonts/Barlow/Barlow-Medium.ttf'),
-    Barlow_Bold: require('../assets/fonts/Barlow/Barlow-Bold.ttf'),
+    Monserrat_Black: require('../assets/fonts/Montserrat/static/Montserrat-Black.ttf'),
+    Monserrat_Light: require('../assets/fonts/Montserrat/static/Montserrat-Light.ttf'),
+    Monserrat_Thin: require('../assets/fonts/Montserrat/static/Montserrat-Thin.ttf'),
+    Monserrat_Medium: require('../assets/fonts/Montserrat/static/Montserrat-Medium.ttf'),
+    Monserrat_SemiBold: require('../assets/fonts/Montserrat/static/Montserrat-SemiBold.ttf'),
+    Monserrat_Bold: require('../assets/fonts/Montserrat/static/Montserrat-Bold.ttf'),
     ...FontAwesome.font,
   });
 
@@ -53,8 +54,11 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const queryclient = new QueryClient()
+  
 
   return (
+    <QueryClientProvider client={queryclient}>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{
         headerShown: false
@@ -64,5 +68,6 @@ function RootLayoutNav() {
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }

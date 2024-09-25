@@ -27,14 +27,14 @@ const WelcomePage = () => {
             />
           </Animated.View>
           <Animated.View entering={FadeInLeft.duration(600).delay(200).springify()} style={{marginBottom: 30}}>
-            <ThemeText className='font-barlow-bold text-5xl text-center leading-[50px] mb-3' colorScheme={colorScheme}>
+            <ThemeText className='font-monserrat-bold text-4xl text-center leading-[43px] mb-3'>
               Discover And Improve Your Skills
             </ThemeText>
            
-            <ThemeText colorScheme={colorScheme} className=' font-barlow-medium text-xl text-center'> Learn from the best courses and tutorials  🚀 </ThemeText>
+            <ThemeText className=' font-monserrat-medium text-xl text-center'> Learn from the best courses and tutorials  🚀 </ThemeText>
           </Animated.View>
           <Animated.View entering={FadeInRight.duration(600).delay(400).springify()} style={{width: "100%"}}>
-            <Button btnText='Get start' action={()=> router.push('/(tabs)')}></Button>
+            <Button btnText='Get start' action={()=> router.push("/(tabs)")}></Button>
           </Animated.View>
         </View>
         </ThemeProvider>

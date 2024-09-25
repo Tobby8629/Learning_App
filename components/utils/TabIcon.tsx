@@ -19,7 +19,7 @@ const TabIcon = ({e,focused,colorScheme}: Tab) => {
     <Link href={e.link}>
       <FontAwesome6 
       name={e.icon} 
-      color={focused ? "green" : colorScheme === 'dark' ?  "white" :  "black"} 
+      color={focused ? "#86efac" : colorScheme === 'dark' ?  "white" :  "black"} 
       size={28}
       />
     </Link>

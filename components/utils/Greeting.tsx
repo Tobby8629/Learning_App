@@ -8,10 +8,14 @@ const Greeting = () => {
   const getGreeting = useCallback(() => {
     if (gethour >= 0 && gethour < 12) {
       return { greeting: "Good Morning", emoji: "☁️"};
-    } else if (gethour >= 12 && gethour < 18) {
+    } else if (gethour >= 12 && gethour < 16) {
       return { greeting: "Good Afternoon", emoji: "🌤️"};
-    } else {
+    } 
+    else if (gethour >= 16 && gethour < 20 ) {
       return { greeting: "Good Evening", emoji: "🌕"};
+    } 
+    else {
+      return {greeting: "Good Night", emoji:"🌑" }
     }
     
   }, [gethour]);
@@ -28,7 +32,7 @@ const Greeting = () => {
 
   return (
     <View className=' flex-row items-center'>
-      <Text className=' font-barlow-light text-xl text-gray-700 mr-1'>{getGreeting().greeting}</Text>
+      <Text className=' font-monserrat-light text-xl text-gray-800 mr-1'>{getGreeting().greeting}</Text>
       <Text className=' text-[25px]'>{getGreeting().emoji}</Text>
     </View>
   )
