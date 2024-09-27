@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Href } from "expo-router";
+import React from "react";
+import { Alert, Share } from "react-native";
 
 export const tab:Array<{ name: string; icon: string; link: Href<string | object> }>  = [
     {
@@ -144,4 +146,53 @@ export const instantFetch = async ( endpoint: string, param?:{}) => {
   
 }
 
+export const components = {
+  About: React.lazy(() => import('../course/About')),
+  Lesson: React.lazy(() => import('../course/Lesson')),
+  Review: React.lazy(() => import('../course/Review')),
+};
+
+
+export const courseMenu: Array<{name: string, id: keyof typeof components}> = [
+  {name: "About",  id: "About"},
+  {name: "Lesson", id: "Lesson"},
+  {name: "Reviews", id: "Review" }
+] 
+
+export const template = {
+  headline: "",
+  id: "", 
+  img1: "", 
+  img2: "", 
+  img3: "",
+  published_title:"",
+  title: "",
+  instructor:[],
+  price: "",
+  url: ""
+}
+
+export const shareLink = async (data: fetchData, course: string | string[]) => {
+  console.log(data)
+  if (!data?.title) {
+    Alert.alert('Error', 'No course data available to share');
+    return;
+  }
+  try {
+    const result = await Share.share({
+      message: `Check Out ${data?.title} https://www.udemy.com/courses/${course}`
+    });
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        console.log(`Shared via: ${result.activityType}`);
+      } else {
+        console.log('Content shared successfully');
+      }
+    } else if (result.action === Share.dismissedAction) {
+      console.log('Share dialog dismissed');
+    }
+  } catch (error: any) {
+    Alert.alert(error.message);
+  }
+}
 

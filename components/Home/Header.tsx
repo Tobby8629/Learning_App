@@ -4,9 +4,7 @@ import Greeting from '../utils/Greeting'
 import { FontAwesome6, Octicons } from '@expo/vector-icons'
 import Animated, { FadeInDown, FadeInRight, FadeInUp } from 'react-native-reanimated'
 import { router } from 'expo-router'
-import axios from 'axios'
-import { newData, UdemyUser } from '../utils/data'
-import { useQuery } from '@tanstack/react-query'
+
 
 
 
