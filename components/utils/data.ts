@@ -109,7 +109,8 @@ export const UdemyUser = {
 }
 
 export const newData = (data: []) => {
-  const loop = data?.map((e:any)=>({
+  const loop = data?.map((e:any) => (
+    {
     headline: e?.headline,
     id: e?.id, 
     img1: e?.image_125_H, 
@@ -120,9 +121,39 @@ export const newData = (data: []) => {
     instructor: e?.visible_instructors,
     price: e?.price,
     url: e?.url,
-    review: e?.course_review
-  }))
+    review: e?.course_review,
+    is_paid: e.is_paid,
+    tracking_id: e.tracking_id,
+    locale: {
+      title: e.title,
+      english_title: e.english_title,
+      simple_english_title: e.simple_english_title,
+    },
+    subtitle: e.subtitle,
+    num_reviews: e?.num_review,
+    image_240x13: e?.image_240x13,
+    }))
   return loop
+}
+
+export const lessonData = (data:[]) => {
+  const newData = data.map((e:any) =>(
+    {
+      id: e?.id,
+      description: e?.description,
+      is_published: e?.is_published,
+      title: e?.title,
+      class: e?._class, 
+      asset: {
+        id: e?.asset?.id,
+        asset_type: e?.asset?.asset_type,
+        title: e?.asset?.title
+      },
+      preview: e?.can_be_previewed,
+      title_cleaned: e?.title_cleaned
+    })
+)
+return newData
 }
 
 export const random = () => {
@@ -141,7 +172,7 @@ export const instantFetch = async ( endpoint: string, param?:{}) => {
     return res.data
   }
   catch(err: any){
-    console.log(err.message)
+    console?.log(err.message)
   }
   
 }
@@ -169,18 +200,28 @@ export const template = {
   title: "",
   instructor:[],
   price: "",
-  url: ""
+  url: "",
+  is_paid: false,
+  tracking_id: "",
+  locale: {
+    title: " ",
+    english_title: " ",
+    simple_english_title: " ",
+  },
+  subtitle: " ",
+  num_reviews: 0,
+  image_240x13: " ",
 }
 
 export const shareLink = async (data: fetchData, course: string | string[]) => {
-  console.log(data)
+  
   if (!data?.title) {
     Alert.alert('Error', 'No course data available to share');
     return;
   }
   try {
     const result = await Share.share({
-      message: `Check Out ${data?.title} https://www.udemy.com/courses/${course}`
+      message: `Check Out ${data?.title} https://www.udemy.com/${course}`
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -194,5 +235,11 @@ export const shareLink = async (data: fetchData, course: string | string[]) => {
   } catch (error: any) {
     Alert.alert(error.message);
   }
+}
+
+export const getChapterNum = (data:lessonData[], id: string) => {
+  const getchapters =  data.filter((e)=> e.class === "chapter")
+  const getChapterIndex = getchapters.findIndex( e => e.id == id)
+  return (getChapterIndex + 1)
 }
 

@@ -1,16 +1,17 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router';
-import { Card } from '../Reuseables/Card';
+import Card  from '../Reuseables/Card';
 import ThemeText from '../Reuseables/ThemeText';
 
 interface SectionProps {
     data: fetchData[];
     headerText: string;
-    route?: string
+    route?: string;
+    cate?: string;
 }
 
-const Sections = ({data, headerText, route}: SectionProps) => {
+const Sections = ({data, headerText, route, cate}: SectionProps) => {
   return (
     <View className='my-5'>
       <View className=' flex-row justify-between my-4 items-center'> 

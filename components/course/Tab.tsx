@@ -17,7 +17,7 @@ const Tab = ({ id, data }: TabProps) => {
 
   return (
     <Suspense fallback={
-      <View className=' my-10 flex-1 items-center justify-center'>
+      <View className='my-10 flex-1 items-center justify-center'>
         <SolidRoundSpinner className='border-green-400' />
       </View> 
      }>
@@ -26,6 +26,6 @@ const Tab = ({ id, data }: TabProps) => {
   );
 };
 
-export default Tab;
+export default React.memo(Tab);
 
 const styles = StyleSheet.create({});

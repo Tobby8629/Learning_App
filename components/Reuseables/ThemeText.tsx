@@ -1,16 +1,17 @@
-import { ColorSchemeName, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { ColorSchemeName, StyleProp, StyleSheet, Text, TextStyle, useColorScheme, View } from 'react-native'
 import React, { ReactNode } from 'react'
 import { DarkTheme } from '@react-navigation/native'
 
 interface text {
   className?: string
   children?: ReactNode
+  style?: StyleProp<TextStyle>
 }
 
-const ThemeText = ({className, children}: text) => {
+const ThemeText = ({className, children, style}: text) => {
   const colorScheme = useColorScheme()
   return (
-    <Text className={`${colorScheme === 'dark' ? "text-white" : "text-gray-700"} ${className}`}>{children}</Text>
+    <Text style={style} className={`${colorScheme === 'dark' ? "text-white" : "text-gray-700"} ${className}`}>{children}</Text>
   )
 }
 

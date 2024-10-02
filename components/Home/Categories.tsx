@@ -38,9 +38,9 @@ const Categories = () => {
         }   
       </View>
       <Animated.View key={view ? 'viewTrue' : 'viewFalse'}entering={FadeIn.duration(300).delay(100)}>
-        <View className='flex-row justify-between flex-wrap gap-2 px-1 py-2'>
+        <View className='flex-row justify-between items-center flex-wrap gap-2 px-1 py-2'>
           {current?.map((e)=>(
-            <TouchableOpacity className='w-[20%]' key={e.id} onPress={()=> router.push(`/course/${e.id}`)}>
+            <TouchableOpacity className='w-[20%] items-center' key={e.id} onPress={()=> router.push(`/category/${e.id}`)}>
               <View className=' w-16 h-16 justify-center items-center rounded-full border-[0.5px] border-green-400'>
                 <FontAwesome6 name={e.icon} size={23} color="#808080c9"/>
               </View>

@@ -1,29 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { UdemyUser } from '../data'
-
+import { instantFetch, newData } from '../data'
+import { useQuery } from '@tanstack/react-query'
 interface Fetch {
-  url: string,
+ params?: {}
+ query: string,
+ more?: string 
 }
 
-const UseFetch = ({url}: Fetch) => {
-  useEffect(()=>{
-    const fetchData = async () => {
-      const res = axios.get(url, 
-        {
-          params: {},
-          auth:{ username: UdemyUser.username, password:""}
-        }
-    )
-    }
-  },[])
+const UseFetch = ({params, query, more}: Fetch) => {
+  const [data, setdata] = useState<fetchData[]>([])
+  const {data: initial, isLoading, error, refetch} = useQuery({
+    queryKey: [query],
+    queryFn: () => {
+      let result
+       more ? 
+      result = instantFetch(`/courses/${more}`): 
+      result = instantFetch("/courses", params)
+      return result
+    },
+    enabled: true
+  })
 
-  return (
-    <View>
-      <Text>UseFetch</Text>
-    </View>
-  )
+  useEffect(()=>{
+    if(initial){
+      setdata(newData(initial.results))
+    }
+  },[initial])
+
+  return {
+    data,
+    setdata,
+    isLoading,
+    error,
+    refetch
+  }
 }
 
 export default UseFetch

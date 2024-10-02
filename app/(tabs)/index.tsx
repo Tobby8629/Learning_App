@@ -5,29 +5,22 @@ import { StatusBar } from 'expo-status-bar';
 import { StatusBarBackground } from '@/components/utils/StatusBarBackground';
 import Categories from '@/components/Home/Categories';
 import { useEffect, useState } from 'react';
-import { instantFetch, newData } from '@/components/utils/data';
-import { useQuery } from '@tanstack/react-query';
 import Sections from '@/components/Home/Sections';
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner';
+import UseFetch from '@/components/utils/Hooks/UseFetch';
 
 export default function TabOneScreen() {
   const [updatedData, setupdatedData] = useState<fetchData[]>([])
   const [secondData, setsecondData] = useState<fetchData[]>([])
 
-  const {data, isLoading, error, refetch} = useQuery({
-    queryKey: ["searchCourse"],
-    queryFn: () => instantFetch("/courses"),
-    enabled: true
-  })
+  const {data, isLoading, error} = UseFetch({query: "homeFetch"})
 
   useEffect(()=>{
     if(data){
-      setupdatedData(newData(data.results).slice(0, 6))
-      setsecondData(newData(data.results).slice(6,12))
+      setupdatedData(data.slice(0, 6))
+      setsecondData(data.slice(6,12))
     }
   },[data])
-
-
   
   return (
     <StatusBarBackground>
@@ -42,8 +35,8 @@ export default function TabOneScreen() {
             </View>:
             <ScrollView className='px-8 mb-52' showsVerticalScrollIndicator={false}>
               <Categories />
-              <Sections data={updatedData} headerText='recommended for you' route="recommend"/>
-              <Sections data={secondData} headerText='Popular courses' route="popular"/>
+              <Sections data={updatedData} headerText='recommended for you' route="recommend" cate=''/>
+              <Sections data={secondData} headerText='Popular courses' route="popular" cate=''/>
             </ScrollView>   
           } 
         </View>

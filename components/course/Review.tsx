@@ -9,6 +9,6 @@ const Review = () => {
   )
 }
 
-export default Review
+export default React.memo(Review)
 
 const styles = StyleSheet.create({})

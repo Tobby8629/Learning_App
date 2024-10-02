@@ -13,7 +13,7 @@ const TabHeader = ({tab, settab}: tabheader) => {
   return (
   <View 
     style = {[check ? {backgroundColor:"#86efac"} : {backgroundColor:"#ffffffa3"}]}
-    className={`mb-5 mt-2 flex-row justify-between p-1 rounded-lg`}
+    className={`mb-3 flex-row justify-between p-1 rounded-lg`}
   >
     {courseMenu.map((e,index)=>(
       <Pressable onPress={()=> settab(e.id)} key={e.name} style={[e.id === tab  ? { backgroundColor: '#e7e6e6ab', transform: [{ scaleX: 1.04 }], zIndex: 99} : {}, {borderRadius: e.id === tab ? 8 : 0}]} className="py-3 w-1/3" >
