@@ -8,15 +8,20 @@ interface Fetch {
  more?: string 
 }
 
+interface updateFetch {
+  total: string,
+  results: fetchData[]
+}
+
 const UseFetch = ({params, query, more}: Fetch) => {
-  const [data, setdata] = useState<fetchData[]>([])
+  const [data, setdata] = useState<updateFetch>()
   const {data: initial, isLoading, error, refetch} = useQuery({
     queryKey: [query],
     queryFn: () => {
       let result
        more ? 
-      result = instantFetch(`/courses/${more}`): 
-      result = instantFetch("/courses", params)
+      result = instantFetch(`/courses/${more}`, params): 
+      result = instantFetch("/courses/", params)
       return result
     },
     enabled: true
@@ -24,7 +29,7 @@ const UseFetch = ({params, query, more}: Fetch) => {
 
   useEffect(()=>{
     if(initial){
-      setdata(newData(initial.results))
+      setdata({total: initial.count, results: newData(initial.results)})
     }
   },[initial])
 

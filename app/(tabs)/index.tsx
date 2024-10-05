@@ -17,8 +17,8 @@ export default function TabOneScreen() {
 
   useEffect(()=>{
     if(data){
-      setupdatedData(data.slice(0, 6))
-      setsecondData(data.slice(6,12))
+      setupdatedData(data.results.slice(0, 6))
+      setsecondData(data.results.slice(6,12))
     }
   },[data])
   

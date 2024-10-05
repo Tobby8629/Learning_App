@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { Suspense } from 'react';
+import React, { forwardRef, Suspense } from 'react';
 import { components } from '../utils/data';
 import SolidRoundSpinner from '../Reuseables/SolidSpinner';
-
 interface  TabProps {
   id: keyof typeof  components
   data: fetchData
 }
-
-const Tab = ({ id, data }: TabProps) => {
+const Tab = ({ id, data }: TabProps)=> {
   const TargetComponent = components[id];
-
   if (!TargetComponent) {
     return <Text>Invalid Tab</Text>;
   }
@@ -29,3 +26,7 @@ const Tab = ({ id, data }: TabProps) => {
 export default React.memo(Tab);
 
 const styles = StyleSheet.create({});
+
+
+
+

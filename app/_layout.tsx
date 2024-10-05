@@ -8,6 +8,9 @@ import 'react-native-reanimated';
 import "../global.css"
 import { useColorScheme } from '@/components/useColorScheme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { CourseContext } from '@/components/course/Context';
+import UseFetch from '@/components/utils/Hooks/UseFetch';
+import ContextWrapper from './ContextWrapper';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,20 +58,16 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const queryclient = new QueryClient()
+
   
 
   return (
-    <QueryClientProvider client={queryclient}>
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{
-        headerShown: false
-        }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="course/[course]" />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-    </QueryClientProvider>
+
+      <QueryClientProvider client={queryclient}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <ContextWrapper />
+      </ThemeProvider>
+      </QueryClientProvider>
+    
   );
 }

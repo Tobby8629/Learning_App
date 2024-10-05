@@ -87,6 +87,8 @@ interface index {
   data: fetchData
   cate?: string
   wrapperStyle?: string
+  page?: string,
+  pagesize?: number
 }
 
 

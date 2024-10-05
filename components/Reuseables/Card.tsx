@@ -6,13 +6,13 @@ import { Octicons } from '@expo/vector-icons';
 import { random } from '../utils/data';
 import { Link, router } from 'expo-router';
 
- const Card = ({data, cate, wrapperStyle}: index) => {
+ const Card = ({data, cate, wrapperStyle, page, pagesize}: index) => {
   const colorscheme = useColorScheme()
   const instructor = data.instructor[0]
   const goToDetails = (id:string) => {
     router.push({
       pathname: "/course/[course]",
-      params: { course: id,  cate: cate },
+      params: { course: id,  cate: cate, page: page, pagesize: pagesize },
     });
   };
   return (

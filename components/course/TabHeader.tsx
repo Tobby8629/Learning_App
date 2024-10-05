@@ -1,6 +1,8 @@
 import { Pressable, Text, useColorScheme, View } from 'react-native'
 import React from 'react'
 import { components, courseMenu } from '../utils/data'
+import { AnimatedScrollView } from 'react-native-reanimated/lib/typescript/reanimated2/component/ScrollView'
+import Animated from 'react-native-reanimated'
 
 interface tabheader {
   tab: keyof typeof  components,

@@ -16,7 +16,7 @@ const Sections = ({data, headerText, route, cate}: SectionProps) => {
     <View className='my-5'>
       <View className=' flex-row justify-between my-4 items-center'> 
         <ThemeText className=' capitalize font-monserrat-bold text-gray-800 text-xl'>{headerText}</ThemeText>
-        <TouchableOpacity onPress={()=>router.push(`/course/${route}`)}>
+        <TouchableOpacity onPress={()=>router.push(`/category/courses`)}>
             <ThemeText className=' text-base font-monserrat-semiBold text-green-400'>See More</ThemeText>
         </TouchableOpacity>
       </View>

@@ -243,3 +243,5 @@ export const getChapterNum = (data:lessonData[], id: string) => {
   return (getChapterIndex + 1)
 }
 
+export const swish = {next: "next", prev: "prev"}
+
