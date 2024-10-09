@@ -205,7 +205,7 @@ export const components = {
 
 
 export const courseMenu: Array<{name: string, id: keyof typeof components}> = [
-  {name: "About",  id: "About"},
+  // {name: "About",  id: "About"},
   {name: "Lesson", id: "Lesson"},
   {name: "Reviews", id: "Review" }
 ] 

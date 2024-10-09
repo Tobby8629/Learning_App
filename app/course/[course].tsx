@@ -10,13 +10,15 @@ import ThemeText from '@/components/Reuseables/ThemeText';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInUp, useAnimatedRef } from 'react-native-reanimated';
 import { FontAwesome } from '@expo/vector-icons';
+import ParallaxScrollView from '@/components/Reuseables/ParallaxScrollView';
+import { transform } from '@babel/core';
 
 const Course = () => { 
   const { course, cate, page, pagesize } = useLocalSearchParams();
   const category = cate?.toString();
   const [update, setUpdate] = useState<fetchData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [tab, setTab] = useState<keyof typeof components>("About")
+  const [tab, setTab] = useState<keyof typeof components>("Lesson")
   const { data, isLoading, refetch } = UseFetch( page && pagesize ? {
     params: { search: category, page: parseInt(page?.toString(), 10)},
     query: `${cate}${course}Course`,
@@ -88,43 +90,40 @@ const Course = () => {
   return (
       <View className='flex-1'>
         <StatusBar hidden={true} />
-        {update?.img3 && (
-          <ImageBackground
-            source={{ uri: update.img3 }}
-            resizeMode='cover'
-            className='absolute top-0 left-0 right-0 flex-row justify-between h-[260px] px-6 pt-16'
-            style={{ zIndex: -1 }} 
-          />
-        )}
-        { !data || loading ? (
-          <View className='flex-1 items-center justify-center'>
-            <SolidRoundSpinner className='border-green-400' />
-          </View>
-        ) : (
-          update && (
-            <Animated.ScrollView
-              ref={scrollRef}
-              showsVerticalScrollIndicator={false}>
-              <View
-                className='px-6 py-3 mt-[270px] min-h-[80vh] flex-1 w-full rounded-t-[30px] -translate-y-10'
-                style={
-                  colorScheme === 'dark'
-                    ? { backgroundColor: 'black' }
-                    : { backgroundColor: 'white' }
-                }>
-                <Animated.View entering={FadeInUp.duration(5000).springify()}>
-                  <ThemeText className='text-2xl font-monserrat-semiBold my-4'>
-                    {update?.title?.replace(/!/g, '')}
-                  </ThemeText>
-                  {InstructorInfo}
-                </Animated.View>
+        {update?.img3 && 
+        <ParallaxScrollView headerImageUri={update.img3}>
+          { !data || loading ? (
+            <View className='flex-1 items-center justify-center'>
+              <SolidRoundSpinner className='border-green-400' />
+            </View>
+          ) : (
+            update && (
+              <Animated.ScrollView
+                ref={scrollRef}
+                showsVerticalScrollIndicator={false}>
+                <View
+                  className='px-6 py-3 min-h-[80vh] flex-1 w-full rounded-t-[30px]'
+                  style={[
+                    colorScheme === 'dark'
+                      ? { backgroundColor: 'black' }
+                      : { backgroundColor: 'white' },
+                      // {transform: [{ translateY: -40 }]}
+                  ]}>
+                  <Animated.View entering={FadeInUp.duration(5000).springify()}>
+                    <ThemeText className='text-2xl font-monserrat-semiBold my-4'>
+                      {update?.title?.replace(/!/g, '')}
+                    </ThemeText>
+                    {InstructorInfo}
+                  </Animated.View>
 
-                <TabHeader tab={tab} settab={setTab} />
-                <Tab data={update} id={tab} />
-              </View>
-            </Animated.ScrollView>
-          )
-        )}
+                  <TabHeader tab={tab} settab={setTab} />
+                  <Tab data={update} id={tab} />
+                </View>
+              </Animated.ScrollView>
+            )
+          )}
+        </ParallaxScrollView>
+        }
       </View>
   );
 };
