@@ -156,6 +156,26 @@ export const lessonData = (data:[]) => {
 return newData
 }
 
+export const ReviewData = (data:[]) => {
+  const newData = data.map((e:any) =>(
+    {
+      class: e?._class,
+      id: e?.id,
+      content: e?.content,
+      rating: e?.rating,
+      created: e?.created,
+      user: {
+        class: e?.user?._class,
+        title: e?.user?.title,
+        display_name: e?.user?.display_name,
+        name: e?.user?.name
+      }
+    })
+  )
+return newData
+}
+
+
 export const random = () => {
   const num = (Math.random() * (5 - 1) + 1);
   return num.toPrecision(2);

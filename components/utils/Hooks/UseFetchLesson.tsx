@@ -10,26 +10,19 @@ interface Lesson {
 }
 
 const UseFetchLesson = ({query, more, params}: Lesson) => {
-  const [data, setdata] = useState<lessonFetch>()
-    const {data: initial, isLoading, error, refetch} = useQuery({
+    const {data, isLoading, error, refetch} = useQuery({
       queryKey: [query],
       queryFn: () => {
-        let result
-        result = instantFetch(`/courses/${more}`, params)
-        return result
+       let result 
+       result = instantFetch(`/courses/${more}`, params)
+       return result
       },
       enabled: true
     })
-  
-    useEffect(()=>{
-      if(initial){
-        setdata({total:initial?.count, courses:lessonData(initial.results)})
-      }
-    },[initial])
+
   
     return {
       data,
-      setdata,
       isLoading,
       error,
       refetch

@@ -18,7 +18,7 @@ const Course = () => {
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<keyof typeof components>("About")
   const { data, isLoading, refetch } = UseFetch( page && pagesize ? {
-    params: { search: category, page: parseInt(page?.toString(), 10), pageSize: parseInt(pagesize?.toString(), 10)},
+    params: { search: category, page: parseInt(page?.toString(), 10)},
     query: `${cate}${course}Course`,
   } : {query: `${course}Course`} );
   const colorScheme = useColorScheme();

@@ -92,4 +92,18 @@ interface index {
 }
 
 
+interface Review {
+ class: string,
+ id: number,
+ content: string,
+ rating: number,
+ created: string,
+ user: {
+   class: string
+   title: string
+   display_name: string
+   name: string
+ }
+}
+
 

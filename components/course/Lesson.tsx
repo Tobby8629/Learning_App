@@ -2,7 +2,7 @@ import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-na
 import React, { useCallback, useEffect, useState } from 'react'
 import UseFetchLesson from '../utils/Hooks/UseFetchLesson'
 import ThemeText from '../Reuseables/ThemeText'
-import { getChapterNum } from '../utils/data'
+import { getChapterNum, lessonData } from '../utils/data'
 import SolidRoundSpinner from '../Reuseables/SolidSpinner'
 import Pagination from '../Reuseables/Pagination'
 import usePagination from '../Reuseables/usePagination'
@@ -14,6 +14,7 @@ interface lesson{
 
 const Lesson = ({data}: lesson) => {
   const [page, setpage] = useState("1")
+  const [ courses, setCourses] = useState<lessonFetch>()
   const [pagesize, setpagesize] = useState(12)
   const {data: courseLesson, refetch, isLoading } = UseFetchLesson(
     {
@@ -25,9 +26,14 @@ const Lesson = ({data}: lesson) => {
       }
    }
   )
-  const {loading, total} = usePagination({data: courseLesson, page, pagesize, refetch})
-  
-  
+
+  useEffect(()=>{
+    if(courseLesson  && courseLesson?.results){
+      setCourses({total:courseLesson?.count, courses:lessonData(courseLesson?.results)})
+    }
+  },[courseLesson])
+
+  const {loading, total} = usePagination({data: courses, page, pagesize, refetch})  
 
   return (
     <View>
@@ -38,11 +44,11 @@ const Lesson = ({data}: lesson) => {
         <>
           <View>
             {
-              courseLesson?.courses &&
-              courseLesson?.courses?.map((e)=> (
+              courses?.courses &&
+              courses?.courses?.map((e)=> (
                 <View key={e.id} className=''>
                   {e.class === "chapter" ?
-                  <ThemeText className='text-2xl mt-5 font-monserrat-bold'>Chapter {getChapterNum(courseLesson.courses, e.id)}: {e.title}</ThemeText>:
+                  <ThemeText className='text-2xl mt-5 font-monserrat-bold'>{e.title}</ThemeText>:
                   <View className='mx-3 py-5 mb-2 border-b-[1px] border-[#86efac4a]'>
                     <ThemeText className='text-lg font-monserrat-medium '>{e.title}</ThemeText>
                   </View>

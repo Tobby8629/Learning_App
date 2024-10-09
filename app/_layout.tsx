@@ -34,6 +34,7 @@ export default function RootLayout() {
     Monserrat_Medium: require('../assets/fonts/Montserrat/static/Montserrat-Medium.ttf'),
     Monserrat_SemiBold: require('../assets/fonts/Montserrat/static/Montserrat-SemiBold.ttf'),
     Monserrat_Bold: require('../assets/fonts/Montserrat/static/Montserrat-Bold.ttf'),
+    Monserrat_Italic: require('../assets/fonts/Montserrat/static/Montserrat-Italic.ttf'),
     ...FontAwesome.font,
   });
 

@@ -11,7 +11,8 @@ module.exports = {
         "monserrat-light": ["Monserrat_Light", "sans-serif"],
         "monserrat-medium":["Monserrat_Medium", "sans-serif"],
         "monserrat-semiBold":["Monserrat_SemiBold", "sans-serif"],
-        "monserrat-bold": ["Monserrat_Bold", "sans-serif"]
+        "monserrat-bold": ["Monserrat_Bold", "sans-serif"],
+        "monserrat-italic": ["Monserrat_Italic", "sans-serif"],
       }
     },
   },
