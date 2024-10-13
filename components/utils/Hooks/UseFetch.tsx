@@ -33,12 +33,22 @@ const UseFetch = ({params, query, more}: Fetch) => {
     }
   },[initial])
 
+  const handleRefetch = async () => {
+    const updatedData = await refetch();
+    if (updatedData.data) {
+      setdata({
+        total: updatedData.data.count,
+        results: newData(updatedData.data.results)
+      })
+    }
+  }
+
   return {
     data,
     setdata,
     isLoading,
     error,
-    refetch
+    refetch: handleRefetch
   }
 }
 

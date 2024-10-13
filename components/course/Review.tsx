@@ -64,14 +64,10 @@ const Review = ({data}:lesson ) => {
           <ThemeText className='text-3xl text-gray-600 py-4 font-monserrat-bold'>Course Reviews: {reviews?.count}</ThemeText>
           {reviews && 
             reviews?.results?.map((e)=>(
-              <View key={e.id.toString()} className='flex-row p-2 py-4 w-full justify-between border-t-[1px] border-gray-400 items-start'>
+              <View key={e.id.toString()} className='p-2 py-4 border-t-[1px] border-gray-400 '>
+              <View className='flex-row w-full justify-between items-start'>
                 <View>
                   <ThemeText className='font-monserrat-bold text-xl text-gray'>{e.user.display_name}</ThemeText>
-                  <ThemeText className='font-monserrat-medium my-2 text-slate-400'>{e.created}</ThemeText>
-                  {e?.content ?
-                    <ThemeText className='font-monserrat-italic text-slate-400 leading-7 text-base'>{ e.content}</ThemeText>:
-                    <ThemeText className='font-monserrat-italic text-slate-400'>No comment</ThemeText>
-                  } 
                 </View>
                 <View className='flex-row items-center'>
                   {Array.from({ length: e.rating }, (_, index) => (
@@ -82,6 +78,14 @@ const Review = ({data}:lesson ) => {
                   }
                   <ThemeText className='ml-2 font-monserrat-semiBold text-lg'>{e.rating}</ThemeText>
                 </View>
+              </View>
+              <View>
+                <ThemeText className='font-monserrat-medium my-2 text-slate-400'>{e.created}</ThemeText>
+                {e?.content ?
+                  <ThemeText className='font-monserrat-italic text-slate-400 leading-7 text-base'>{ e.content}</ThemeText>:
+                  <ThemeText className='font-monserrat-italic text-slate-400'>No comment</ThemeText>
+                }
+              </View>
               </View>
             ))
           }

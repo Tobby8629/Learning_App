@@ -4,7 +4,7 @@ import { FontAwesome6 } from '@expo/vector-icons'
 
 interface input {
   id: string,
-  handlechange: (id:string, value:string) => void
+  handlechange: (value:string, id?:string) => void
   keyboardtype?: KeyboardTypeOptions
   val: string
   className?: string,
@@ -22,7 +22,7 @@ const Input = ({id, handlechange, name, placeholder, keyboardtype, val, classNam
     <View  className='w-full h-full flex-row items-center p-2 '>
       <TextInput 
         value={val}
-        onChangeText={(value) => handlechange(id,value)}
+        onChangeText={(value) => handlechange(value,id)}
         placeholder={placeholder}
         keyboardType={keyboardtype}
         secureTextEntry={checkpasswowrd ? show || false : undefined}

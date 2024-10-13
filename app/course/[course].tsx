@@ -12,6 +12,7 @@ import Animated, { FadeInUp, useAnimatedRef } from 'react-native-reanimated';
 import { FontAwesome } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/Reuseables/ParallaxScrollView';
 import { transform } from '@babel/core';
+import UseFetchLesson from '@/components/utils/Hooks/UseFetchLesson';
 
 const Course = () => { 
   const { course, cate, page, pagesize } = useLocalSearchParams();
@@ -19,27 +20,43 @@ const Course = () => {
   const [update, setUpdate] = useState<fetchData | null>(null);
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<keyof typeof components>("Lesson")
-  const { data, isLoading, refetch } = UseFetch( page && pagesize ? {
-    params: { search: category, page: parseInt(page?.toString(), 10)},
-    query: `${cate}${course}Course`,
-  } : {query: `${course}Course`} );
+
+  const {data, refetch, isLoading } = UseFetchLesson(
+    {
+      query: `${course}Course`, 
+      more: `${course}`,
+   }
+  )
   const colorScheme = useColorScheme();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
 
-  const fetch = useCallback(() => {
-    if (data) {
-      setLoading(true);
-      const updat = data?.results?.find((e: any) => e.id == course) as fetchData;
-      if (updat) {
-        setUpdate(updat);
-      }
-      setLoading(false);
-    }
-  }, [data, course]);
 
   useEffect(() => {
-    fetch();
-  }, [fetch]);
+    if(data){
+      setUpdate({
+      headline: data?.headline,
+      id: data.id,
+      img1: data.image_125_H,
+      img2: data.image_240x135,
+      img3: data.image_480x270,
+      published_title: data.published_title,
+      title: data.title,
+      instructor: data.visible_instructors,
+      price: data.price,
+      url: data.url,
+      is_paid: data.is_paid,
+      tracking_id: data.tracking_id,
+      locale: {
+        title: data.locale.title,
+        english_title: data.locale.english_title,
+        simple_english_title: data.locale.simple_english_title
+      },
+      subtitle: data.subtitle || null,  // 'subtitle' doesn't exist in the original data
+      num_reviews: data.num_review || null,  // 'num_review' doesn't exist in the original data
+      image_240x13: data.image_240x13 || null  
+      })
+    }
+  }, [data]);
 
   const InstructorInfo = useMemo(() => {
     return update?.instructor?.[0] ? (

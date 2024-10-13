@@ -88,8 +88,6 @@ const styles = StyleSheet.create({
     transform: [{translateY: -40}],
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    // paddingHorizontal: 16,
-    // paddingVertical: 20,
   },
   defaultContent: {
     fontSize: 18,

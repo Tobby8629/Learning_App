@@ -108,7 +108,7 @@ export const UdemyUser = {
   password: "s1ctbEDas04HSGDuBRZPklMnC69Pbj0CLtUhcKLswHEu8DeVcQFZDTrOuWeOp3JKlZv6PIidWz2UuGtb5tUwbrV1ZGhbBaR8UHpHthyfTl5rasrG73xZOYOfeG6a3fUZ"
 }
 
-export const newData = (data: []) => {
+export const newData = (data: any[]) => {
   const loop = data?.map((e:any) => (
     {
     headline: e?.headline,
@@ -133,7 +133,7 @@ export const newData = (data: []) => {
     num_reviews: e?.num_review,
     image_240x13: e?.image_240x13,
     }))
-  return loop
+  return loop as fetchData[]
 }
 
 export const lessonData = (data:[]) => {
