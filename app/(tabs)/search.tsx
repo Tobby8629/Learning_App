@@ -9,6 +9,7 @@ import UseFetch from '@/components/utils/Hooks/UseFetch'
 import { newData } from '@/components/utils/data'
 import Card from '@/components/Reuseables/Card'
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner'
+import Empty from '@/components/Reuseables/Empty'
 
 interface searchInterface {
   total: string | undefined
@@ -51,8 +52,13 @@ const search = () => {
     }
   },[searchData])
 
-  const renderItem = useCallback(({ item }: any) => {
-    return <Card data={item} cate='courses' wrapperStyle='w-[95%] mx-auto my-3' />
+  const renderItem = useCallback(({ item, index }: any) => {
+    return (
+      <Animated.View entering={FadeInDown.delay(index * 200).duration(3000).springify()}>
+        <Card data={item} cate='courses' wrapperStyle='w-[95%] mx-auto my-3' />
+      </Animated.View>
+    
+  )
   }, [courses])
   
 
@@ -109,7 +115,15 @@ const search = () => {
               renderItem={renderItem} 
               showsVerticalScrollIndicator={false}
               initialNumToRender={10} 
-              windowSize={5} 
+              windowSize={5}
+              ListEmptyComponent={()=>(
+                <View className='flex-1 h-[60vh] justify-center'>
+                  <Empty />
+                  <ThemeText className='text-center font-monserrat-semiBold text-xl'>Couldn't find course or tutor <ThemeText className='font-monserrat-bold text-2xl'>{value}</ThemeText></ThemeText>
+                  <ThemeText className='text-center my-2 font-monserrat-medium text-lg'>Try searching another course or tutor</ThemeText>
+                </View>
+                
+              )}
             />
             }
         </Animated.View>
@@ -122,5 +136,3 @@ const search = () => {
 }
 
 export default search
-
-const styles = StyleSheet.create({})
