@@ -1,13 +1,15 @@
-import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView, useColorScheme } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Input from '@/components/Reuseables/Input'
 import Button from '@/components/Reuseables/Button'
 import { Register } from '@/lib/Auth'
-import { useQuery } from '@tanstack/react-query'
+import ThemeText from '@/components/Reuseables/ThemeText'
+import { Link, router } from 'expo-router'
 
 const signUp = () => {
   const [regData, setregData] = useState({email:"", password:"", username: "", confirm_password: ""})
   const [isLoading, setisLoading] = useState(false)
+
   const form = [
     {
       id: "username",
@@ -37,7 +39,7 @@ const signUp = () => {
     },
   ]
   
-  const handlechange = (id:string, val:string) => {
+  const handleInputchange = (val:string, id:string) => {
     setregData({...regData, [id]: val})
   }
   const handlesubmit = async () => {
@@ -55,7 +57,7 @@ const signUp = () => {
       return
     }
     try {
-      await Register(regData)
+      await Register(regData).then(()=>router.replace("/(tabs)/"))
     }
     catch(err:any) {
       Alert.alert("Error", err.message)
@@ -88,8 +90,8 @@ const signUp = () => {
               <View className=' h-14 mb-5 w-full border-[1px] flex-row items-center border-gray-700 rounded-lg'>
                 <Input 
                   id={e.id}
-                  handlechange={handlechange}
                   className=' font-monserrat-medium'
+                  handlechange={handleInputchange}
                   val={e.val}
                   name={e.name}
                   placeholder={e.placeholder}
@@ -99,6 +101,9 @@ const signUp = () => {
           </View>
           ))
          }
+         <View className='mb-5'>
+            <ThemeText>Already have an account? <Link href="/auth/signIn"> Sign In </Link></ThemeText>
+         </View>
          <Button isloading={isLoading} btnText={'Register'} action={handlesubmit} textStyle= "  text-[21px]"/>
        </View>
        </ScrollView>

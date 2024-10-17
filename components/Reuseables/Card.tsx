@@ -1,10 +1,11 @@
 import React from 'react'
 import Sections from '@/components/Home/Sections';
-import { Image, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Image, Pressable, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 import ThemeText from './ThemeText';
 import { Octicons } from '@expo/vector-icons';
 import { random } from '../utils/data';
 import { Link, router } from 'expo-router';
+import { CreateWishList } from '@/lib/Auth';
 
  const Card = ({data, cate, wrapperStyle, page, pagesize}: index) => {
   const colorscheme = useColorScheme()
@@ -15,6 +16,14 @@ import { Link, router } from 'expo-router';
       params: { course: id,  cate: cate, page: page, pagesize: pagesize },
     });
   };
+  const wishlistData = {
+    title: data.title, 
+    img_1: data.img1,
+    img_2: data.img2,
+    img_3: data.img3,
+    price: data.price,
+    wish_id: data.id
+  } as wishList
   return (
     <TouchableOpacity onPress={()=> goToDetails(data.id)} key={data.id} className={`mr-4 w-[280px] p-3 rounded-md ${colorscheme === 'light' ? "bg-gray-50":"bg-gray-700"} ${wrapperStyle}`}>
       <Image 
@@ -26,7 +35,9 @@ import { Link, router } from 'expo-router';
       <View className='flex-row justify-between'>
         <View className='flex-row items-center'>
           <ThemeText className=' font-monserrat-semiBold'>{data.price}</ThemeText>
-          <Octicons name="heart-fill" color="red" size={20} style={{marginHorizontal: 5}}/>
+          <Pressable onPress={()=>CreateWishList(wishlistData)}>
+            <Octicons name="heart-fill" color="red" size={20} style={{marginHorizontal: 5}}/>
+          </Pressable>
         </View>
         <Link href={`https://www.udemy.com${instructor?.url}`}>
           <View className='flex-row items-center'>

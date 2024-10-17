@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Href } from "expo-router";
-import React from "react";
+import React, { SetStateAction } from "react";
 import { Alert, Share } from "react-native";
 
 export const tab:Array<{ name: string; icon: string; link: Href<string | object> }>  = [
@@ -264,4 +264,11 @@ export const getChapterNum = (data:lessonData[], id: string) => {
 }
 
 export const swish = {next: "next", prev: "prev"}
+
+export interface globally {
+  user: user,
+  loading: boolean,
+  setloading: React.Dispatch<SetStateAction<boolean>>,
+  setuser: React.Dispatch<SetStateAction<user|null>>
+}
 

@@ -22,7 +22,7 @@ const search = () => {
   const [isLoading, setisLoading] = useState(false)
   const [Istying, setIstying] = useState(false)
   const [courses, setcourses] = useState<searchInterface>()
-  const handleChange = (val: string) => {
+  const handleChange = (val: string, id:string) => {
     setvalue(val)
     if(value.length < 1){
       setIstying(true)
@@ -71,7 +71,7 @@ const search = () => {
             val={value}
             placeholder='Search for a course'
             id="input"
-            handlechange={(val)=>handleChange(val)}
+            handlechange={handleChange}
           />
         </View>
         

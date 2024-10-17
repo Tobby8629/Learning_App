@@ -3,10 +3,11 @@ const setup = {
   platform: 'com.tobby.lms',
   Endpoint: "https://cloud.appwrite.io/v1",
   database: "66f18f6500006e898d7d",
-  user: "66f18f7200056fed7a07"
+  user: "66f18f7200056fed7a07",
+  wishlist: "67108cb8002972974602"
 }
 
-import { Client, Account, ID, Avatars, Databases } from 'react-native-appwrite';
+import { Client, Account, ID, Avatars, Databases, Query } from 'react-native-appwrite';
 
 const client = new Client();
 const account = new Account(client)
@@ -17,8 +18,8 @@ const databases = new Databases(client)
     .setProject(setup.project)
     .setPlatform(setup.platform);
 
-const Login = async (login: Login) => {
-  await account.createEmailPasswordSession(login?.email, login?.password);
+export const Login = async (login: Login) => {
+ return await account.createEmailPasswordSession(login?.email, login?.password);
 }
 
 export const Register =  async (data: Data) => {
@@ -43,6 +44,49 @@ export const Register =  async (data: Data) => {
   }
   
 } 
+
+export const CreateWishList = async(data:wishList ) => {
+  console.log(data)
+  const getwishes = await databases.listDocuments(
+    setup.database,
+    setup.wishlist,
+  )
+  console.log(getwishes)
+}
+
+export const getUser = async () => {
+  try {
+    const result = await account.get();
+    const getInfo = databases.listDocuments(
+      setup.database,
+      setup.user,
+      [Query.equal("accountId", result.$id)]
+    )
+    const getData = ((await getInfo).documents[0])
+    const data = {
+      id: getData.$id,
+      email: getData.email,
+      username: getData.username,
+      wishlist: getData.wishlist,
+      avatar: getData.avatar
+    }
+     return data 
+    }
+    catch(err: any){
+      console.error(new Error(err.message))
+    }
+  }
+  
+
+export const Logout = async () => {
+  try {
+   const result = await account.deleteSession("current");
+   return result
+  }
+  catch(err: any){
+    console.error(err.message)
+  }
+}
 
 
 

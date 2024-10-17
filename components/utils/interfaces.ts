@@ -20,12 +20,31 @@ interface auth {
   $id: string
 }
 
+interface wishList {
+  title: string
+  wish_id: string
+  price: string
+  img_1: string
+  img_2: string
+  img_3: string
+}
+
+interface user {
+  id: string,
+  email: string,
+  username: string,
+  wishlist: wishList[],
+  avatar: string
+}
+
 interface regData {
   username: string,
   email: string,
   password: string,
   confirm_password: string
 }
+
+
 
 interface Instructor {
   image: string,
