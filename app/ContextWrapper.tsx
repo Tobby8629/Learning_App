@@ -4,10 +4,12 @@ import { CourseContext } from '@/components/course/Context'
 import UseFetch from '@/components/utils/Hooks/UseFetch'
 import { Redirect, Stack } from 'expo-router'
 import Globalcontext, { globalContext } from '@/context/Globalcontext'
+import Logout from '@/components/Reuseables/Logout'
+import { globally } from '@/components/utils/data'
 
 const ContextWrapper = () => {
   const {data, isLoading, error} = UseFetch({query: "homeFetch"})
-
+  
   return (
     <Globalcontext>
        <CourseContext.Provider value={{data,isLoading,error}}>

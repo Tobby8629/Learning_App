@@ -1,15 +1,12 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import "../global.css"
 import { useColorScheme } from '@/components/useColorScheme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CourseContext } from '@/components/course/Context';
-import UseFetch from '@/components/utils/Hooks/UseFetch';
 import ContextWrapper from './ContextWrapper';
 
 export {
@@ -60,10 +57,7 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const queryclient = new QueryClient()
 
-  
-
   return (
-
       <QueryClientProvider client={queryclient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <ContextWrapper />

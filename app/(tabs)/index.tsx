@@ -4,16 +4,20 @@ import Header from '@/components/Home/Header';
 import { StatusBar } from 'expo-status-bar';
 import { StatusBarBackground } from '@/components/utils/StatusBarBackground';
 import Categories from '@/components/Home/Categories';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Sections from '@/components/Home/Sections';
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner';
 import UseFetch from '@/components/utils/Hooks/UseFetch';
+import Logout from '@/components/Reuseables/Logout';
+import { globalContext } from '@/context/Globalcontext';
+import { globally } from '@/components/utils/data';
 
 export default function TabOneScreen() {
   const [updatedData, setupdatedData] = useState<fetchData[]>([])
   const [secondData, setsecondData] = useState<fetchData[]>([])
 
   const {data, isLoading, error} = UseFetch({query: "homeFetch"})
+  const {loading} = useContext(globalContext) as globally
 
   useEffect(()=>{
     if(data){
@@ -41,24 +45,9 @@ export default function TabOneScreen() {
           } 
         </View>
       </SafeAreaView>
+      {loading ? <Logout /> : null}
     </StatusBarBackground>
   
   );
 }
 
-
-
-
-{/* <FlatList
-  data={updatedData}
-  keyExtractor={(e)=>e.id}
-  renderItem={(e) => <Index data={e.item}/>}
-  ListHeaderComponent={()=>(
-    <View className='px-8 w-full border-[1px]'>
-      <Categories />
-    </View>
-  )}
-  horizontal
-  showsHorizontalScrollIndicator={false}
-/>     */}
- 

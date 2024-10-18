@@ -4,30 +4,13 @@ import Greeting from '../utils/Greeting'
 import { FontAwesome6, Octicons } from '@expo/vector-icons'
 import Animated, { FadeInDown, FadeInRight, FadeInUp } from 'react-native-reanimated'
 import { router } from 'expo-router'
-import { Logout } from '@/lib/Auth'
 import { globalContext } from '@/context/Globalcontext'
 import { globally } from '../utils/data'
+import Logout from '../Reuseables/Logout'
 
 const Header = () => {
-  const {user, setuser, setloading, loading} = useContext(globalContext) as globally
-  const endSession = async () => {
-    setloading(true)
-    try {
-      const trylog = await Logout()
-      if(trylog) {
-        setloading(false)
-        router.replace("/auth/signIn")
-        setuser(null)
-      }
-    }
-    catch(err) {
-      console.log(err)
-      setloading(false)
-    }
-    finally {
-      setloading(false)
-    }
-  }
+  const {logout} = useContext(globalContext) as globally
+  
 
   return (
     <View className='min-h-24 pt-3 px-8 w-full bg-green-300  '>
@@ -37,7 +20,7 @@ const Header = () => {
           <Text  className='text-gray-800 font-monserrat-bold text-[23px]'>Tobby</Text>
         </Animated.View>
         <Animated.View entering={FadeInRight.duration(2000).delay(300).springify()}>
-          <Pressable onPress={endSession}>
+          <Pressable onPress={()=>logout()}>
             <FontAwesome6 name="bell" size={20}/>
           </Pressable>
         </Animated.View>

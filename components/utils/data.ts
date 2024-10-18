@@ -234,7 +234,6 @@ export const template = {
 }
 
 export const shareLink = async (data: fetchData, course: string | string[]) => {
-  
   if (!data?.title) {
     Alert.alert('Error', 'No course data available to share');
     return;
@@ -270,5 +269,8 @@ export interface globally {
   loading: boolean,
   setloading: React.Dispatch<SetStateAction<boolean>>,
   setuser: React.Dispatch<SetStateAction<user|null>>
+  logout: () => void
+  check: () => void
 }
+
 

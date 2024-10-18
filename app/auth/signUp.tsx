@@ -1,10 +1,12 @@
-import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView, useColorScheme } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView, useColorScheme, Image } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Input from '@/components/Reuseables/Input'
 import Button from '@/components/Reuseables/Button'
 import { Register } from '@/lib/Auth'
 import ThemeText from '@/components/Reuseables/ThemeText'
 import { Link, router } from 'expo-router'
+import images from '@/assets/images/images'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 
 const signUp = () => {
   const [regData, setregData] = useState({email:"", password:"", username: "", confirm_password: ""})
@@ -83,10 +85,17 @@ const signUp = () => {
     <SafeAreaView className="h-full w-full items-center">
       <ScrollView className='w-full'>
        <View className='min-h-[80vh] w-10/12 m-auto py-5 items-center justify-center'>
+       {/* <Animated.View entering={FadeInDown.duration(10000).springify()} className='h-52 w-8/12 mb-5'>
+        <Image
+            source={images.authImg}
+            className='h-full w-full'
+          />
+       </Animated.View> */}
+       
          {
           form.map((e)=>(
             <View key={e.name}>
-              <Text className='mb-2 text-xl font-monserrat-semiBold capitalize'>{e.name}</Text>
+              <ThemeText className='mb-2 text-xl font-monserrat-semiBold capitalize'>{e.name}</ThemeText>
               <View className=' h-14 mb-5 w-full border-[1px] flex-row items-center border-gray-700 rounded-lg'>
                 <Input 
                   id={e.id}
@@ -101,8 +110,8 @@ const signUp = () => {
           </View>
           ))
          }
-         <View className='mb-5'>
-            <ThemeText>Already have an account? <Link href="/auth/signIn"> Sign In </Link></ThemeText>
+         <View className='my-5 flex-row justify-start'>
+           <ThemeText className='font-monserrat-semiBold text-right'>Already have an account?<Link href="/auth/signUp" className='text-blue-400 font-monserrat-bold'> Sign In</Link></ThemeText>
          </View>
          <Button isloading={isLoading} btnText={'Register'} action={handlesubmit} textStyle= "  text-[21px]"/>
        </View>
