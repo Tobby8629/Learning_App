@@ -27,6 +27,7 @@ interface wishList {
   img_1: string
   img_2: string
   img_3: string
+  user: string
 }
 
 interface user {

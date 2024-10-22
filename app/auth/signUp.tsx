@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView, useColorScheme, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, KeyboardTypeOptions, Alert, TouchableOpacity, ScrollView, useColorScheme, Image, Pressable } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Input from '@/components/Reuseables/Input'
 import Button from '@/components/Reuseables/Button'
@@ -7,6 +7,7 @@ import ThemeText from '@/components/Reuseables/ThemeText'
 import { Link, router } from 'expo-router'
 import images from '@/assets/images/images'
 import Animated, { FadeInDown } from 'react-native-reanimated'
+import { FontAwesome6 } from '@expo/vector-icons'
 
 const signUp = () => {
   const [regData, setregData] = useState({email:"", password:"", username: "", confirm_password: ""})
@@ -84,13 +85,15 @@ const signUp = () => {
   return (
     <SafeAreaView className="h-full w-full items-center">
       <ScrollView className='w-full'>
-       <View className='min-h-[80vh] w-10/12 m-auto py-5 items-center justify-center'>
-       {/* <Animated.View entering={FadeInDown.duration(10000).springify()} className='h-52 w-8/12 mb-5'>
-        <Image
-            source={images.authImg}
-            className='h-full w-full'
-          />
-       </Animated.View> */}
+        <Pressable className='flex-row items-center w-11/12 mx-auto mb-5' onPress={()=> router.back()}>
+            <FontAwesome6 name="arrow-left" size={25} color={"#86efac"}/>
+            <ThemeText className='ml-3 font-monserrat-semiBold text-2xl'> Back</ThemeText>
+         </Pressable>
+         
+       <View className='min-h-[80vh] w-11/12 m-auto py-5'>
+         <View className='mb-14'>
+            <ThemeText className='text-center font-monserrat-bold text-4xl'>Sign Up</ThemeText>
+         </View>
        
          {
           form.map((e)=>(

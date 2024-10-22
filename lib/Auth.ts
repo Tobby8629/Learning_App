@@ -7,6 +7,7 @@ const setup = {
   wishlist: "67108cb8002972974602"
 }
 
+import { add, update } from 'lodash';
 import { Client, Account, ID, Avatars, Databases, Query } from 'react-native-appwrite';
 
 const client = new Client();
@@ -46,12 +47,61 @@ export const Register =  async (data: Data) => {
 } 
 
 export const CreateWishList = async(data:wishList ) => {
-  console.log(data)
   const getwishes = await databases.listDocuments(
     setup.database,
     setup.wishlist,
   )
-  console.log(getwishes)
+  
+  const cree = async(update?: any) => {
+    await databases.createDocument(
+      setup.database,
+      setup.wishlist,
+      ID.unique(),
+      {
+        title: data.title,
+        wish_id: data.wish_id,
+        price: data.price,
+        img_1: data.img_1,
+        img_2: data.img_2,
+        img_3: data.img_3,
+        user: update || [data.user] 
+    })
+  }
+
+  if(getwishes.total <= 0){ 
+    {await cree()}
+    return
+  } 
+  
+  const checkexist = getwishes?.documents?.find(doc => doc?.wish_id == data?.wish_id)
+  if(!checkexist) {
+   await cree()
+  } 
+  else {
+    const checkuser = checkexist.user.find((user: any) => user.$id == data.user)
+    if(checkuser) {
+      const removeuser = checkexist.user.filter((user:any) => user.$id !== data.user)
+      await databases.updateDocument(
+        setup.database,
+        setup.wishlist,
+        checkexist?.$id,
+        {
+          user:removeuser
+        }
+      )
+    }
+    else {
+      checkexist.user.push(data.user)
+      await databases.updateDocument(
+        setup.database,
+        setup.wishlist,
+        checkexist?.$id,
+        {
+          user:checkexist.user
+        }
+      )
+    }
+  }
 }
 
 export const getUser = async () => {
