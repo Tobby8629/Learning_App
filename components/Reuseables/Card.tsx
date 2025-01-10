@@ -1,16 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Sections from '@/components/Home/Sections';
-import { Image, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Image, Pressable, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 import ThemeText from './ThemeText';
 import { Octicons } from '@expo/vector-icons';
-import { random } from '../utils/data';
+import { globally, random } from '../utils/data';
 import { Link, router } from 'expo-router';
+import { CreateWishList } from '@/lib/Auth';
+import { globalContext } from '@/context/Globalcontext';
 
-export const Card = ({data}: index) => {
+ const Card = ({data, cate, wrapperStyle, page, pagesize}: index) => {
   const colorscheme = useColorScheme()
   const instructor = data.instructor[0]
+  const {user} = useContext(globalContext) as globally
+  const goToDetails = (id:string) => {
+    router.push({
+      pathname: "/course/[course]",
+      params: { course: id,  cate: cate, page: page, pagesize: pagesize },
+    });
+  };
+  
+  const wishlistData = {
+    title: data.title, 
+    img_1: data.img1,
+    img_2: data.img2,
+    img_3: data.img3,
+    price: data.price,
+    wish_id: data.id.toString(),
+    user: user?.id.toString()
+  } as wishList
   return (
-    <TouchableOpacity onPress={()=>router.push(`/course/${data.id}`)} key={data.id} className={`mr-4 w-[280px] p-3 rounded-md ${colorscheme === 'light' ? "bg-gray-50":"bg-gray-700"}`}>
+    <TouchableOpacity onPress={()=> goToDetails(data.id)} key={data.id} className={`mr-4 w-[280px] p-3 rounded-md ${colorscheme === 'light' ? "bg-gray-50":"bg-gray-700"} ${wrapperStyle}`}>
       <Image 
         source={{uri: data.img3}}
         alt={data.title}
@@ -20,8 +39,9 @@ export const Card = ({data}: index) => {
       <View className='flex-row justify-between'>
         <View className='flex-row items-center'>
           <ThemeText className=' font-monserrat-semiBold'>{data.price}</ThemeText>
-          <Octicons name="star-fill" color="gold" size={20} style={{marginHorizontal: 5}}/>
-          <ThemeText>{random()}</ThemeText>
+          <Pressable onPress={()=>CreateWishList(wishlistData)}>
+            <Octicons name="heart-fill" color="red" size={20} style={{marginHorizontal: 5}}/>
+          </Pressable>
         </View>
         <Link href={`https://www.udemy.com${instructor?.url}`}>
           <View className='flex-row items-center'>
@@ -36,3 +56,5 @@ export const Card = ({data}: index) => {
     </TouchableOpacity>
   )
 }
+
+export default React.memo(Card)

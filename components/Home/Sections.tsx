@@ -1,21 +1,22 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router';
-import { Card } from '../Reuseables/Card';
+import Card  from '../Reuseables/Card';
 import ThemeText from '../Reuseables/ThemeText';
 
 interface SectionProps {
     data: fetchData[];
     headerText: string;
-    route?: string
+    route?: string;
+    cate?: string;
 }
 
-const Sections = ({data, headerText, route}: SectionProps) => {
+const Sections = ({data, headerText, route, cate}: SectionProps) => {
   return (
     <View className='my-5'>
       <View className=' flex-row justify-between my-4 items-center'> 
         <ThemeText className=' capitalize font-monserrat-bold text-gray-800 text-xl'>{headerText}</ThemeText>
-        <TouchableOpacity onPress={()=>router.push(`/course/${route}`)}>
+        <TouchableOpacity onPress={()=>router.push(`/category/courses`)}>
             <ThemeText className=' text-base font-monserrat-semiBold text-green-400'>See More</ThemeText>
         </TouchableOpacity>
       </View>
