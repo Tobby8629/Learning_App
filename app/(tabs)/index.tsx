@@ -11,13 +11,16 @@ import UseFetch from '@/components/utils/Hooks/UseFetch';
 import Logout from '@/components/Reuseables/Logout';
 import { globalContext } from '@/context/Globalcontext';
 import { globally } from '@/components/utils/data';
+import search from './search';
+import ContextWrapper from '../ContextWrapper';
+import { CourseContext } from '@/components/course/Context';
 
 export default function TabOneScreen() {
   const [updatedData, setupdatedData] = useState<fetchData[]>([])
   const [secondData, setsecondData] = useState<fetchData[]>([])
-
-  const {data, isLoading, error} = UseFetch({query: "homeFetch"})
-  const {loading} = useContext(globalContext) as globally
+  const {data, isLoading, error} = useContext(CourseContext)
+  // const {data, isLoading, error} = UseFetch({query: "homeFetch", params: {search: "courses"}})
+  // const {loading} = useContext(globalContext) as globally
 
   useEffect(()=>{
     if(data){
@@ -45,7 +48,7 @@ export default function TabOneScreen() {
           } 
         </View>
       </SafeAreaView>
-      {loading ? <Logout /> : null}
+      {/* {loading ? <Logout /> : null} */}
     </StatusBarBackground>
   
   );

@@ -76,7 +76,7 @@ export const CreateWishList = async(data:wishList ) => {
   const checkexist = getwishes?.documents?.find(doc => doc?.wish_id == data?.wish_id)
   if(!checkexist) {
    await cree()
-  } 
+   } 
   else {
     const checkuser = checkexist.user.find((user: any) => user.$id == data.user)
     if(checkuser) {
@@ -101,7 +101,7 @@ export const CreateWishList = async(data:wishList ) => {
         }
       )
     }
-  }
+   }
 }
 
 export const getUser = async () => {

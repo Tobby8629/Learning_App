@@ -3,26 +3,26 @@ import { Href } from "expo-router";
 import React, { SetStateAction } from "react";
 import { Alert, Share } from "react-native";
 
-export const tab:Array<{ name: string; icon: string; link: Href<string | object> }>  = [
+export const tab:Array<{ name: string; icon: string; link: Href }>  = [
     {
       name: "index",
       icon: "house",
-      link: {pathname: "/(tabs)/"}
+      link: "/(tabs)"
     },
     {
       name: "search",
       icon: "magnifying-glass",
-      link: {pathname: "/(tabs)/search"}
+      link: "/(tabs)/search"
     },
     {
       name: "likes",
       icon: "heart",
-      link: {pathname: "/(tabs)/likes"}
+      link: "/(tabs)/likes"
     },
     {
       name: "profile",
       icon: "user",
-      link: {pathname: "/(tabs)/profile"}
+      link: "/(tabs)/profile"
     },
 ]
 
@@ -181,11 +181,12 @@ export const random = () => {
   return num.toPrecision(2);
 }
 
-export const instantFetch = async ( endpoint: string, param?:{}) => {
+export const instantFetch = async ( endpoint: string, params?:{}) => {
   try{
-    const res = await axios.get(`https://www.udemy.com/api-2.0${endpoint}`, 
+    
+    const res =  await axios.get(`https://www.udemy.com/api-2.0${endpoint}`, 
       {
-        params: param ? param : null,
+        params: params ? params : "",
         auth:{ username: UdemyUser.username, password:UdemyUser.password}
       }
     )
@@ -271,6 +272,15 @@ export interface globally {
   setuser: React.Dispatch<SetStateAction<user|null>>
   logout: () => void
   check: () => void
+}
+
+
+export const CheckList = (id: string, user: user) => {
+  if(user?.wishlist){
+    const check = user?.wishlist.find((e: any) => e.wish_id == id)
+    if(check) return true
+  }
+  return false
 }
 
 

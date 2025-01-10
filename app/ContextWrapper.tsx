@@ -3,12 +3,12 @@ import React, { useContext } from 'react'
 import { CourseContext } from '@/components/course/Context'
 import UseFetch from '@/components/utils/Hooks/UseFetch'
 import { Redirect, Stack } from 'expo-router'
-import Globalcontext, { globalContext } from '@/context/Globalcontext'
+import Globalcontext from '@/context/Globalcontext'
 import Logout from '@/components/Reuseables/Logout'
 import { globally } from '@/components/utils/data'
 
 const ContextWrapper = () => {
-  const {data, isLoading, error} = UseFetch({query: "homeFetch"})
+  const {data, isLoading, error} = UseFetch({query: "homeFetch", params: {search: "courses"}})
   
   return (
     <Globalcontext>

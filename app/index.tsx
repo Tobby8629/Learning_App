@@ -19,6 +19,7 @@ const WelcomePage = () => {
   const animation = useRef<LottieView>(null);
   const colorScheme = useColorScheme()
   const {user, loading} = useContext(globalContext) as globally
+
   
   return (
     <SafeAreaView className=' h-screen'>
@@ -45,7 +46,7 @@ const WelcomePage = () => {
         </Animated.View>
         <Animated.View entering={FadeInRight.duration(600).delay(400).springify()} style={{width: "100%"}}>
           {user ?
-            <Button btnText={`continue as ${user.username}`} action={()=> router.push("/(tabs)/")}/>:
+            <Button btnText={`continue as ${user.username}`} action={()=> router.push("/(tabs)")}/>:
             <Button btnText='Get start' action={()=> router.push("/auth/signIn")} />
           }
         </Animated.View>

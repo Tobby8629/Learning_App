@@ -1,10 +1,16 @@
 import React, { createContext, useState, useContext } from 'react';
 interface CourseContextType {
-    courses: fetchData[]; // Assuming 'fetchData[]' is your expected type for courses
+    data: {total: string, results: fetchData[]} | undefined;
+    isLoading: boolean;
+    error: any// Assuming 'fetchData[]' is your expected type for courses
   }
 
 // Create a context for the course
-export const CourseContext = createContext<any>(null);
+export const CourseContext = createContext<CourseContextType>({
+    data: {total: '', results: []},
+    isLoading: false,
+    error: null
+});
 export const LessonContext = createContext(null)
 
 // Create a custom hook for easy access to the context

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { instantFetch, newData } from '../data'
 import { useQuery } from '@tanstack/react-query'
 interface Fetch {
@@ -19,9 +18,9 @@ const UseFetch = ({params, query, more}: Fetch) => {
     queryKey: [query],
     queryFn: () => {
       let result
-       more ? 
+      more ? 
       result = instantFetch(`/courses/${more}`, params): 
-      result = instantFetch("/courses/", params)
+      result = instantFetch("/courses", params)
       return result
     },
     enabled: true

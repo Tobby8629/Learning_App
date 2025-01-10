@@ -31,7 +31,6 @@ const Category = () => {
   })
 
   return (
-    <CourseContext.Provider value={{data, isLoading}}>
       <SafeAreaView className='h-full'>
         <View className='min-h-[90vh] w-full items-center py-5 flex-1'>
           {isLoading || loading ? (
@@ -58,7 +57,7 @@ const Category = () => {
           )}
         </View>
     </SafeAreaView>
-    </CourseContext.Provider>
+
   )
 }
 

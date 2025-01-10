@@ -3,15 +3,16 @@ import Sections from '@/components/Home/Sections';
 import { Image, Pressable, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 import ThemeText from './ThemeText';
 import { Octicons } from '@expo/vector-icons';
-import { globally, random } from '../utils/data';
+import { CheckList, globally, random } from '../utils/data';
 import { Link, router } from 'expo-router';
 import { CreateWishList } from '@/lib/Auth';
 import { globalContext } from '@/context/Globalcontext';
+import SolidRoundSpinner from './SolidSpinner';
 
  const Card = ({data, cate, wrapperStyle, page, pagesize}: index) => {
   const colorscheme = useColorScheme()
   const instructor = data.instructor[0]
-  const {user} = useContext(globalContext) as globally
+  const {user, check, loading} = useContext(globalContext) as globally
   const goToDetails = (id:string) => {
     router.push({
       pathname: "/course/[course]",
@@ -28,6 +29,11 @@ import { globalContext } from '@/context/Globalcontext';
     wish_id: data.id.toString(),
     user: user?.id.toString()
   } as wishList
+
+  const updateCheckList = async () => {
+    await CreateWishList(wishlistData).then(()=>check())
+  }
+
   return (
     <TouchableOpacity onPress={()=> goToDetails(data.id)} key={data.id} className={`mr-4 w-[280px] p-3 rounded-md ${colorscheme === 'light' ? "bg-gray-50":"bg-gray-700"} ${wrapperStyle}`}>
       <Image 
@@ -39,9 +45,11 @@ import { globalContext } from '@/context/Globalcontext';
       <View className='flex-row justify-between'>
         <View className='flex-row items-center'>
           <ThemeText className=' font-monserrat-semiBold'>{data.price}</ThemeText>
-          <Pressable onPress={()=>CreateWishList(wishlistData)}>
-            <Octicons name="heart-fill" color="red" size={20} style={{marginHorizontal: 5}}/>
-          </Pressable>
+          <Pressable onPress={updateCheckList}>
+            {loading ? <SolidRoundSpinner className='border-green-400 w-4 h-4' /> :
+            <Octicons name="heart-fill" color={CheckList(data.id, user) ? "red" : "gray"} size={20} style={{marginHorizontal: 5}}/>
+            }
+            </Pressable>
         </View>
         <Link href={`https://www.udemy.com${instructor?.url}`}>
           <View className='flex-row items-center'>

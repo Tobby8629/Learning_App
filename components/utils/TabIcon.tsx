@@ -7,7 +7,7 @@ interface Tab {
   e: {
     name: string;
     icon: string;
-    link: Href<string | object>; 
+    link: Href; 
   };
   focused: boolean;
   colorScheme: ColorSchemeName | undefined; 
