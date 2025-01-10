@@ -3,7 +3,7 @@ import Sections from '@/components/Home/Sections';
 import { Image, Pressable, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 import ThemeText from './ThemeText';
 import { Octicons } from '@expo/vector-icons';
-import { CheckList, globally, random } from '../utils/data';
+import { CheckList, globally, random, updateCheckList } from '../utils/data';
 import { Link, router } from 'expo-router';
 import { CreateWishList } from '@/lib/Auth';
 import { globalContext } from '@/context/Globalcontext';
@@ -20,19 +20,6 @@ import SolidRoundSpinner from './SolidSpinner';
     });
   };
   
-  const wishlistData = {
-    title: data.title, 
-    img_1: data.img1,
-    img_2: data.img2,
-    img_3: data.img3,
-    price: data.price,
-    wish_id: data.id.toString(),
-    user: user?.id.toString()
-  } as wishList
-
-  const updateCheckList = async () => {
-    await CreateWishList(wishlistData).then(()=>check())
-  }
 
   return (
     <TouchableOpacity onPress={()=> goToDetails(data.id)} key={data.id} className={`mr-4 w-[280px] p-3 rounded-md ${colorscheme === 'light' ? "bg-gray-50":"bg-gray-700"} ${wrapperStyle}`}>
@@ -45,7 +32,7 @@ import SolidRoundSpinner from './SolidSpinner';
       <View className='flex-row justify-between'>
         <View className='flex-row items-center'>
           <ThemeText className=' font-monserrat-semiBold'>{data.price}</ThemeText>
-          <Pressable onPress={updateCheckList}>
+          <Pressable onPress={()=>updateCheckList(data,user,check)}>
             {loading ? <SolidRoundSpinner className='border-green-400 w-4 h-4' /> :
             <Octicons name="heart-fill" color={CheckList(data.id, user) ? "red" : "gray"} size={20} style={{marginHorizontal: 5}}/>
             }

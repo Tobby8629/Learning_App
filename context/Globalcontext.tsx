@@ -48,6 +48,7 @@ const logout = async () => {
     setloading(false)
   }
 }
+
 useFocusEffect(useCallback(()=>{
   check()
 },[]))

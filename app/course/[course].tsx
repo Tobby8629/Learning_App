@@ -1,7 +1,7 @@
 import { Image, ImageBackground, Pressable, useColorScheme, View } from 'react-native';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocalSearchParams } from 'expo-router';
-import { components, shareLink } from '@/components/utils/data';
+import { CheckList, components, globally, shareLink, updateCheckList } from '@/components/utils/data';
 import UseFetch from '@/components/utils/Hooks/UseFetch';
 import TabHeader from '@/components/course/TabHeader';
 import Tab from '@/components/course/Tab';
@@ -13,13 +13,15 @@ import { FontAwesome } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/Reuseables/ParallaxScrollView';
 import { transform } from '@babel/core';
 import UseFetchLesson from '@/components/utils/Hooks/UseFetchLesson';
+import { globalContext } from '@/context/Globalcontext';
 
 const Course = () => { 
   const { course, cate, page, pagesize } = useLocalSearchParams();
-  const category = cate?.toString();
+  // const category = cate?.toString();
   const [update, setUpdate] = useState<fetchData | null>(null);
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<keyof typeof components>("Lesson")
+  const {user, check, loading: isLoad} = useContext(globalContext) as globally
 
   const {data, refetch, isLoading } = UseFetchLesson(
     {
@@ -84,12 +86,15 @@ const Course = () => {
             {update.price}
           </ThemeText>
           <View className='flex-row'>
-            <View className='items-center mr-3'>
-              <FontAwesome name="heart" size={20} color="gray" />
-              <ThemeText className='font-monserrat-medium text-xs capitalize'>
-                Add to wishlist
-              </ThemeText>
-            </View>
+            {
+              isLoad ? <SolidRoundSpinner className='border-green-400 w-7 h-7' /> :
+              <Pressable onPress={()=> updateCheckList(data, user, check)} className='items-center mr-3'>
+                <FontAwesome name="heart" size={20} color={CheckList(update.id, user) ? "red": "gray"} />
+                <ThemeText className='font-monserrat-medium text-xs capitalize'>
+                  {CheckList(update.id, user) ? "Remove from wishlist" : "Add to wishlist"}
+                </ThemeText>
+              </Pressable>
+            }
             <Pressable
               onPress={() => shareLink(update, update.id)}
               className='items-center'>
@@ -102,7 +107,7 @@ const Course = () => {
         </View>
       </View>
     ) : null;
-  }, [update]);
+  }, [update, check]);
 
   return (
       <View className='flex-1'>

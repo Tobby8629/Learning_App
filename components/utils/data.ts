@@ -1,3 +1,4 @@
+import { CreateWishList } from "@/lib/Auth";
 import axios from "axios";
 import { Href } from "expo-router";
 import React, { SetStateAction } from "react";
@@ -274,6 +275,19 @@ export interface globally {
   check: () => void
 }
 
+
+export const updateCheckList = async (data: fetchData, user:user, check: ()=>void) => {
+  const wishlistData = {
+    title: data.title, 
+    img_1: data.img1,
+    img_2: data.img2,
+    img_3: data.img3,
+    price: data.price,
+    wish_id: data.id.toString(),
+    user: user?.id.toString()
+  } as wishList  
+  await CreateWishList(wishlistData).then(()=>check())
+}
 
 export const CheckList = (id: string, user: user) => {
   if(user?.wishlist){

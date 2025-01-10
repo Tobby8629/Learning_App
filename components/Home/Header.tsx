@@ -6,7 +6,7 @@ import Animated, { FadeInDown, FadeInRight, FadeInUp } from 'react-native-reanim
 import { router } from 'expo-router'
 import { globalContext } from '@/context/Globalcontext'
 import { globally } from '../utils/data'
-import Logout from '../Reuseables/Logout'
+// import Logout from '../Reuseables/Logout'
 
 const Header = () => {
   const {logout} = useContext(globalContext) as globally

@@ -1,5 +1,5 @@
-import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { View } from '@/components/Themed';
 import Header from '@/components/Home/Header';
 import { StatusBar } from 'expo-status-bar';
 import { StatusBarBackground } from '@/components/utils/StatusBarBackground';
@@ -7,12 +7,6 @@ import Categories from '@/components/Home/Categories';
 import { useContext, useEffect, useState } from 'react';
 import Sections from '@/components/Home/Sections';
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner';
-import UseFetch from '@/components/utils/Hooks/UseFetch';
-import Logout from '@/components/Reuseables/Logout';
-import { globalContext } from '@/context/Globalcontext';
-import { globally } from '@/components/utils/data';
-import search from './search';
-import ContextWrapper from '../ContextWrapper';
 import { CourseContext } from '@/components/course/Context';
 
 export default function TabOneScreen() {
