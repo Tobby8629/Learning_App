@@ -1,8 +1,7 @@
-import { Image, ImageBackground, Pressable, useColorScheme, View } from 'react-native';
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { Image, Pressable, useColorScheme, View } from 'react-native';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { CheckList, components, globally, shareLink, updateCheckList } from '@/components/utils/data';
-import UseFetch from '@/components/utils/Hooks/UseFetch';
 import TabHeader from '@/components/course/TabHeader';
 import Tab from '@/components/course/Tab';
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner';
@@ -11,7 +10,6 @@ import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInUp, useAnimatedRef } from 'react-native-reanimated';
 import { FontAwesome } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/Reuseables/ParallaxScrollView';
-import { transform } from '@babel/core';
 import UseFetchLesson from '@/components/utils/Hooks/UseFetchLesson';
 import { globalContext } from '@/context/Globalcontext';
 

@@ -1,4 +1,4 @@
-import { Alert, FlatList, Keyboard, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Alert, FlatList, Keyboard, SafeAreaView, useColorScheme, View } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Input from '@/components/Reuseables/Input'
 import Button from '@/components/Reuseables/Button'
@@ -6,7 +6,6 @@ import ThemeText from '@/components/Reuseables/ThemeText'
 import LottieView from 'lottie-react-native'
 import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated'
 import UseFetch from '@/components/utils/Hooks/UseFetch'
-import { newData } from '@/components/utils/data'
 import Card from '@/components/Reuseables/Card'
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner'
 import Empty from '@/components/Reuseables/Empty'
@@ -28,6 +27,8 @@ const search = () => {
       setIstying(true)
     }
   }
+
+  const colorScheme = useColorScheme()
 
   const {data: searchData, error, refetch} = UseFetch({
     query: "searchCourses",

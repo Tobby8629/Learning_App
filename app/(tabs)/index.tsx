@@ -13,8 +13,7 @@ export default function TabOneScreen() {
   const [updatedData, setupdatedData] = useState<fetchData[]>([])
   const [secondData, setsecondData] = useState<fetchData[]>([])
   const {data, isLoading, error} = useContext(CourseContext)
-  // const {data, isLoading, error} = UseFetch({query: "homeFetch", params: {search: "courses"}})
-  // const {loading} = useContext(globalContext) as globally
+
 
   useEffect(()=>{
     if(data){
