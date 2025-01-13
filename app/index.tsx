@@ -22,8 +22,7 @@ const WelcomePage = () => {
 
   
   return (
-    <SafeAreaView className=' h-screen'>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <SafeAreaView className='h-screen'>
       <View className='w-11/12 mx-auto items-center justify-center h-[90vh]'>
         <Animated.View entering={FadeInDown.duration(10000).springify()} style={{width: "90%"}}>
           <LottieView
@@ -51,7 +50,6 @@ const WelcomePage = () => {
           }
         </Animated.View>
       </View>
-      </ThemeProvider>
     </SafeAreaView>
    
   )
