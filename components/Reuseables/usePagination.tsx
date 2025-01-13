@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
+import { StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
 interface pagin {
   data: any

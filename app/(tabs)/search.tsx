@@ -9,6 +9,8 @@ import UseFetch from '@/components/utils/Hooks/UseFetch'
 import Card from '@/components/Reuseables/Card'
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner'
 import Empty from '@/components/Reuseables/Empty'
+import { useTheme } from '@react-navigation/native'
+
 
 interface searchInterface {
   total: string | undefined
@@ -61,10 +63,12 @@ const search = () => {
     
   )
   }, [courses])
+
+  const {colors} = useTheme()
   
 
   return (
-   <SafeAreaView>
+  <View className='pt-16 h-full' style={{backgroundColor: colors.background}}>
     <View className='flex-1 p-5 min-h-screen pb-32'>
       <View className='w-full border-[1.5px] border-gray-600 h-16 rounded-2xl flex-row'>
         <View className='w-9/12 pl-3'>
@@ -132,7 +136,7 @@ const search = () => {
         }
     </View>
       
-   </SafeAreaView>
+   </View>
   )
 }
 

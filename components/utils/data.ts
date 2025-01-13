@@ -289,6 +289,19 @@ export const updateCheckList = async (data: fetchData, user:user, check: ()=>voi
   await CreateWishList(wishlistData).then(()=>check())
 }
 
+export const deleteCheckList = async (data:wishList, user:user, check: ()=>void) => {
+  const wishlistData = {
+    title: data.title, 
+    img_1: data.img_1,
+    img_2: data.img_2,
+    img_3: data.img_3,
+    price: data.price,
+    wish_id: data.wish_id.toString(),
+    user: user?.id.toString()
+  } as wishList  
+  await CreateWishList(wishlistData).then(()=>check())
+}
+
 export const CheckList = (id: string, user: user) => {
   if(user?.wishlist){
     const check = user?.wishlist.find((e: any) => e.wish_id == id)

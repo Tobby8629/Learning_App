@@ -45,7 +45,7 @@ const WelcomePage = () => {
         </Animated.View>
         <Animated.View entering={FadeInRight.duration(600).delay(400).springify()} style={{width: "100%"}}>
           {user ?
-            <Button btnText={`continue as ${user.username}`} action={()=> router.push("/(tabs)")}/>:
+            <Button btnText={`continue as ${user.username}`} action={()=> router.replace("/(tabs)")}/>:
             <Button btnText='Get start' action={()=> router.push("/auth/signIn")} />
           }
         </Animated.View>

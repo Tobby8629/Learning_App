@@ -27,8 +27,9 @@ export default function TabLayout() {
           padding: 50
         },
         }}>
-
+        
       {tab.map((e)=>(
+        
         <Tabs.Screen
         key={e.name} 
         name={e.name}
@@ -37,7 +38,6 @@ export default function TabLayout() {
             <TabIcon e={e} focused={focused} colorScheme={colorScheme}/>
           ),
         }}
-        
         />
       ))}
       

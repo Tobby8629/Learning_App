@@ -13,6 +13,9 @@ module.exports = {
         "monserrat-semiBold":["Monserrat_SemiBold", "sans-serif"],
         "monserrat-bold": ["Monserrat_Bold", "sans-serif"],
         "monserrat-italic": ["Monserrat_Italic", "sans-serif"],
+      },
+      boxShadow: {
+        'custom': '4px 4px 10px gray',
       }
     },
   },

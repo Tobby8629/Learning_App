@@ -1,12 +1,10 @@
-import { FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native'
-import React, { SetStateAction, useEffect, useRef, useState } from 'react'
+import {  Pressable, StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native'
+import React, { SetStateAction, } from 'react'
 import ThemeText from './ThemeText'
-import Animated, { FadeInUp, scrollTo } from 'react-native-reanimated'
+import Animated, { FadeInUp,} from 'react-native-reanimated'
 import SelectDropdown from 'react-native-select-dropdown'
 import { FontAwesome } from '@expo/vector-icons'
 import { swish } from '../utils/data'
-import { useCourse } from '../course/Context'
-import { AnimatedScrollView } from 'react-native-reanimated/lib/typescript/reanimated2/component/ScrollView'
 
 
 interface pagination {
