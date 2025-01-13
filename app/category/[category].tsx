@@ -1,13 +1,12 @@
-import { FlatList, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native'
+import React, { useCallback,  useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import SolidRoundSpinner from '@/components/Reuseables/SolidSpinner'
 import Card from '@/components/Reuseables/Card'
 import UseFetch from '@/components/utils/Hooks/UseFetch'
 import usePagination from '@/components/Reuseables/usePagination'
 import Pagination from '@/components/Reuseables/Pagination'
-import { CourseContext } from '@/components/course/Context'
-import ThemeText from '@/components/Reuseables/ThemeText'
+
 
 const Category = () => {
   const { category } = useLocalSearchParams()

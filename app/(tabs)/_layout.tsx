@@ -27,8 +27,9 @@ export default function TabLayout() {
           padding: 50
         },
         }}>
-
+        
       {tab.map((e)=>(
+        
         <Tabs.Screen
         key={e.name} 
         name={e.name}

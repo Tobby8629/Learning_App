@@ -7,7 +7,7 @@ import 'react-native-reanimated';
 import "../global.css"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ContextWrapper from './ContextWrapper';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 
 export {
@@ -55,14 +55,11 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
   const queryclient = new QueryClient()
 
   return (
       <QueryClientProvider client={queryclient}>
-        {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
-          <ContextWrapper />
-        {/* </ThemeProvider> */}
+        <ContextWrapper /> 
       </QueryClientProvider>
     
   );
