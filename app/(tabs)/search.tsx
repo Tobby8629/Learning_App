@@ -68,8 +68,8 @@ const search = () => {
   
 
   return (
-  <SafeAreaView className='h-full'>
-    <View className='flex-1 p-5 min-h-screen pb-32' style={{backgroundColor: colors.background}}>
+  <View className='pt-16 h-full' style={{backgroundColor: colors.background}}>
+    <View className='flex-1 p-5 min-h-screen pb-32'>
       <View className='w-full border-[1.5px] border-gray-600 h-16 rounded-2xl flex-row'>
         <View className='w-9/12 pl-3'>
           <Input 
@@ -136,7 +136,7 @@ const search = () => {
         }
     </View>
       
-   </SafeAreaView>
+   </View>
   )
 }
 
